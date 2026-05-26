@@ -37,6 +37,8 @@
 
 ```
 designable-v5/
+├── apps/
+│   └── playground/            # Vite 演示应用（GitHub Pages）
 ├── packages/
 │   ├── core/                  # 设计器引擎（节点树、拖拽、快捷键等）
 │   ├── react/                 # 设计器 UI 组件（面板、工具栏、大纲树等）
@@ -44,7 +46,7 @@ designable-v5/
 │   ├── react-sandbox/         # 沙箱运行时
 │   └── shared/                # 公共工具函数
 ├── formily/
-│   ├── antd/                  # Formily + Ant Design 组件物料
+│   ├── antd/                  # Formily + Ant Design 组件物料（纯库）
 │   ├── setters/               # 高级 Setter（联动、数据源、校验等）
 │   └── transformer/           # 设计树 ↔ Formily Schema 转换
 └── styles/
@@ -78,7 +80,7 @@ pnpm install
 ### 启动 Playground
 
 ```bash
-pnpm start:antd
+pnpm start:playground
 ```
 
 启动后访问 [http://127.0.0.1:3000](http://127.0.0.1:3000) 即可体验表单设计器（基于 Vite，冷启动约 1 秒内）。
@@ -140,7 +142,7 @@ pnpm release
 
 | 命令                                                        | 说明                                          |
 | ----------------------------------------------------------- | --------------------------------------------- |
-| `pnpm start:antd` / `pnpm start:playground`                 | 启动 Ant Design 表单设计器 Playground（Vite） |
+| `pnpm start:playground`                                     | 启动 Ant Design 表单设计器 Playground（Vite） |
 | `pnpm build:playground`                                     | 构建 Playground 静态站点                      |
 | `pnpm build`                                                | 构建所有 workspace 包（Turborepo + tsup）     |
 | `pnpm turbo run build --filter=@designable-v5/formily-antd` | 仅构建指定包                                  |

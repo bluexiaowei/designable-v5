@@ -63,7 +63,7 @@ import {
   FormCollapse,
   FormLayout,
   FormGrid,
-} from '../src'
+} from '@designable-v5/formily-antd'
 
 setNpmCDNRegistry('//unpkg.com')
 
@@ -111,7 +111,7 @@ const App = () => {
         ],
         rootComponentName: 'Form',
       }),
-    []
+    [],
   )
   return (
     <Designer engine={engine}>

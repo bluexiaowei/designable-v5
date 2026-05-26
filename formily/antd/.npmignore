@@ -1,11 +1,9 @@
 node_modules
 *.log
 build
-playground
 __tests__
 .eslintrc
 tsconfig.json
-vite.config.ts
 tsup.config.ts
 copy.ts
 src

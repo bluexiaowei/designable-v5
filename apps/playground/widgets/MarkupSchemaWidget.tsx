@@ -151,7 +151,7 @@ export default ()=>{
 }
 
 export const MarkupSchemaWidget: React.FC<IMarkupSchemaWidgetProps> = (
-  props
+  props,
 ) => {
   return (
     <MonacoInput

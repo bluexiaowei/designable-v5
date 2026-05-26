@@ -1,25 +1,26 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import fs from 'fs'
 import path from 'path'
-import fs from 'fs-extra'
-import { globSync } from 'glob'
 
 const repoRoot = path.resolve(__dirname, '../..')
 
 const getWorkspaceAlias = () => {
   const results: Record<string, string> = {}
-  const patterns = ['packages/*', 'formily/*']
 
-  for (const pattern of patterns) {
-    const found = globSync(pattern, { cwd: repoRoot })
-    found.forEach((dir: string) => {
-      const pkgPath = path.join(repoRoot, dir, 'package.json')
-      if (!fs.existsSync(pkgPath)) return
-      const workspacePkg = fs.readJSONSync(pkgPath)
+  for (const scope of ['packages', 'formily']) {
+    const scopeDir = path.join(repoRoot, scope)
+    if (!fs.existsSync(scopeDir)) continue
+
+    for (const dir of fs.readdirSync(scopeDir)) {
+      const pkgPath = path.join(scopeDir, dir, 'package.json')
+      if (!fs.existsSync(pkgPath)) continue
+
+      const workspacePkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
       if (workspacePkg.name) {
-        results[workspacePkg.name] = path.join(repoRoot, dir, 'src')
+        results[workspacePkg.name] = path.join(scopeDir, dir, 'src')
       }
-    })
+    }
   }
 
   return results
@@ -27,7 +28,6 @@ const getWorkspaceAlias = () => {
 
 export default defineConfig({
   base: process.env.VITE_BASE || '/',
-  root: path.resolve(__dirname, 'playground'),
   plugins: [react()],
   resolve: {
     alias: getWorkspaceAlias(),
@@ -46,7 +46,7 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: path.resolve(__dirname, 'build'),
+    outDir: 'build',
     emptyOutDir: true,
   },
   optimizeDeps: {

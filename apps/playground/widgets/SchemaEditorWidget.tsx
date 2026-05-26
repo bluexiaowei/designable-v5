@@ -12,7 +12,7 @@ export interface ISchemaEditorWidgetProps {
 }
 
 export const SchemaEditorWidget: React.FC<ISchemaEditorWidgetProps> = (
-  props
+  props,
 ) => {
   return (
     <MonacoInput

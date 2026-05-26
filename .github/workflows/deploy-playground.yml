@@ -52,7 +52,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: formily/antd/build
+          path: apps/playground/build
 
   deploy:
     needs: build

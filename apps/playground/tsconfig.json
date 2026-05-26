@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "paths": {
+      "@designable-v5/*": ["../../packages/*/src", "../../formily/*/src"]
+    }
+  },
+  "include": ["./**/*"]
+}
