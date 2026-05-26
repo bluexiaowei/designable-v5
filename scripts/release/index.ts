@@ -13,7 +13,9 @@ import {
   getTaggedTime,
 } from './git'
 
-const LernaJSON = fs.readJSONSync(path.resolve(__dirname, '../../lerna.json'))
+const PackageJSON = fs.readJSONSync(
+  path.resolve(__dirname, '../../packages/shared/package.json')
+)
 
 const ReleaseTitle = 'Designable Release 🚀'
 
@@ -73,7 +75,7 @@ const getGroupChanges = (from = lastTag(), to = 'HEAD') => {
 
 const createChangelog = (from = lastTag(), to = 'HEAD') => {
   const isHead = to === 'HEAD'
-  const headVersion = isHead ? LernaJSON?.version : to
+  const headVersion = isHead ? PackageJSON?.version : to
   const changes = getGroupChanges(from, to)
   const nowDate = isHead
     ? moment().format('YYYY-MM-DD')
@@ -119,8 +121,8 @@ const createReleaseNote = () => {
         body,
         draft: false,
         prerelease: isPrerelease(to),
-        owner: 'alibaba',
-        repo: 'designable',
+        owner: 'bluexiaowei',
+        repo: 'designable-v5',
         endpoint: 'https://api.github.com',
         auth: {
           token,

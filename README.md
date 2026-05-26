@@ -25,6 +25,7 @@
 | TypeScript       | ^4.9.5  |
 | Vite             | ^6.0.0  |
 | Turborepo        | ^2.5.0  |
+| Changesets       | ^2.29.0 |
 
 ## 项目结构
 
@@ -107,6 +108,28 @@ yarn test
 yarn lint
 ```
 
+### 版本发布（Changesets）
+
+8 个子包采用 **固定版本**（fixed），通过 Changesets 统一 bump 与发版：
+
+```bash
+# 1. 记录本次变更（会生成 .changeset/*.md）
+yarn changeset
+
+# 2. 本地预览版本 bump（可选）
+yarn version-packages
+
+# 3. 构建并发布到 npm（CI 也会自动执行）
+yarn release
+```
+
+**CI 自动化流程：**
+
+1. PR 合并到 `main` 且包含 changeset 文件 → Actions 自动创建 **Version Packages** PR
+2. 合并 Version PR → 自动 `yarn build` + `changeset publish` 发布到 npm
+
+发布 npm 需在仓库 Secrets 中配置 `NPM_TOKEN`。当前为 beta 线，可先用 `yarn pre:enter:beta` 进入预发布模式。
+
 ## 常用脚本
 
 | 命令                                                        | 说明                                          |
@@ -115,6 +138,9 @@ yarn lint
 | `yarn build:playground`                                     | 构建 Playground 静态站点                      |
 | `yarn build`                                                | 构建所有 workspace 包（Turborepo）            |
 | `yarn turbo run build --filter=@designable-v5/formily-antd` | 仅构建指定包                                  |
+| `yarn changeset`                                            | 创建发版变更记录                              |
+| `yarn version-packages`                                     | 根据 changeset 更新版本号与 CHANGELOG         |
+| `yarn release`                                              | 构建并发布到 npm                              |
 | `yarn test`                                                 | 运行单元测试                                  |
 | `yarn lint`                                                 | ESLint 检查并自动修复                         |
 
