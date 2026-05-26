@@ -144,8 +144,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alibaba/designable.git"
+    "url": "git+https://github.com/bluexiaowei/designable-v5.git"
   },
+  "bugs": {
+    "url": "https://github.com/bluexiaowei/designable-v5/issues"
+  },
+  "homepage": "https://bluexiaowei.github.io/designable-v5/",
   "config": {
     "ghooks": {
       "pre-commit": "lint-staged",

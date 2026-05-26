@@ -34,7 +34,10 @@ export const ActionsWidget = observer(() => {
           GlobalRegistry.setDesignerLanguage(e.target.value)
         }}
       />
-      <Button href="https://github.com/alibaba/designable" target="_blank">
+      <Button
+        href="https://github.com/bluexiaowei/designable-v5"
+        target="_blank"
+      >
         <GithubOutlined />
         Github
       </Button>

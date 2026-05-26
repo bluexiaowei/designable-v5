@@ -25,6 +25,7 @@ const getWorkspaceAlias = () => {
 }
 
 export default defineConfig({
+  base: process.env.VITE_BASE || '/',
   root: path.resolve(__dirname, 'playground'),
   plugins: [react()],
   resolve: {

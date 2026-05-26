@@ -2,6 +2,10 @@
 
 基于 [Designable](https://github.com/alibaba/designable) 的可视化设计器 monorepo，已适配 **Ant Design v5** 与 **Formily 2.x**，可用于搭建表单设计器、Schema 编辑器等低代码场景。
 
+**在线 Playground：** [https://bluexiaowei.github.io/designable-v5/](https://bluexiaowei.github.io/designable-v5/)
+
+**仓库地址：** [https://github.com/bluexiaowei/designable-v5](https://github.com/bluexiaowei/designable-v5)
+
 ## 特性
 
 - **拖拽式设计** — 流畅的组件拖拽、嵌套与布局调整
@@ -70,6 +74,14 @@ yarn start:antd
 ```
 
 启动后访问 [http://127.0.0.1:3000](http://127.0.0.1:3000) 即可体验表单设计器（基于 Vite，冷启动约 1 秒内）。
+
+### 在线演示
+
+Push 到 `main` 分支后，GitHub Actions 会自动将 Playground 部署到 GitHub Pages：
+
+[https://bluexiaowei.github.io/designable-v5/](https://bluexiaowei.github.io/designable-v5/)
+
+首次使用前，请在仓库 **Settings → Pages → Build and deployment** 中选择 **GitHub Actions** 作为来源。
 
 构建 Playground 静态产物：
 
