@@ -41,6 +41,10 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
       selected.length === 1
     )
     const form = useMemo(() => {
+      // 如果节点没有name，则使用id作为name
+      if (!node?.props?.name) {
+        node.props.name = node.id
+      }
       return createForm({
         initialValues: node?.designerProps?.defaultProps,
         values: node?.props,
@@ -103,5 +107,5 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
         timeout: 500,
       })
     },
-  }
+  },
 )
