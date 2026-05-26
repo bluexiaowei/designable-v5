@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "devEngines": {
+  "engines": {
     "node": ">=18.0.0"
   },
   "workspaces": [
@@ -125,7 +125,7 @@
     "rollup-plugin-external-globals": "^0.6.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-typescript2": "^0.36.0",
     "rollup-plugin-postcss": "^4.0.0",
     "semver-regex": "^2.0.0",
     "staged-git-files": "^1.1.2",
@@ -153,6 +153,9 @@
     },
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "maxSubjectLength": 0
     }
   },
   "lint-staged": {

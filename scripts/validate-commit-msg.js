@@ -17,7 +17,7 @@ var findup = require('findup')
 var semverRegex = require('semver-regex')
 
 var config = getConfig()
-var MAX_LENGTH = config.maxSubjectLength || 100
+var MAX_LENGTH = config.maxSubjectLength
 var IGNORED = new RegExp(
   util.format('(^WIP)|(^v)|(^%s$)', semverRegex().source)
 )
@@ -88,7 +88,12 @@ var validateMessage = function (raw) {
     var SUBJECT_PATTERN_ERROR_MSG =
       config.subjectPatternErrorMsg || 'subject does not match subject pattern!'
 
-    if (firstLine.length > MAX_LENGTH && !squashing) {
+    if (
+      typeof MAX_LENGTH === 'number' &&
+      MAX_LENGTH > 0 &&
+      firstLine.length > MAX_LENGTH &&
+      !squashing
+    ) {
       error('is longer than %d characters !', MAX_LENGTH)
       isValid = false
     }

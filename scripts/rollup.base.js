@@ -52,7 +52,10 @@ const presets = () => {
       use: {
         less: {
           plugins: [new NpmImport({ prefix: '~' })],
-          javascriptEnabled: true,
+          lessOptions: {
+            javascriptEnabled: true,
+            paths: [path.resolve(__dirname, '..')],
+          },
         },
         sass: {},
         stylus: {},
