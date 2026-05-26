@@ -19,6 +19,7 @@
 | Formily          | ^2.3.7  |
 | @formily/antd-v5 | ^1.2.4  |
 | TypeScript       | ^4.9.5  |
+| Vite             | ^6.0.0  |
 
 ## 项目结构
 
@@ -53,7 +54,7 @@ designable-v5/
 
 ### 环境要求
 
-- Node.js >= 14
+- Node.js >= 18（推荐 20 LTS 或更高）
 - Yarn 1.x
 
 ### 安装依赖
@@ -68,7 +69,13 @@ yarn install
 yarn start:antd
 ```
 
-启动后访问 [http://127.0.0.1:3000](http://127.0.0.1:3000) 即可体验表单设计器。
+启动后访问 [http://127.0.0.1:3000](http://127.0.0.1:3000) 即可体验表单设计器（基于 Vite，冷启动约 1 秒内）。
+
+构建 Playground 静态产物：
+
+```bash
+yarn workspace @designable-v5/formily-antd run build:playground
+```
 
 ### 构建
 
@@ -89,12 +96,13 @@ yarn lint
 
 ## 常用脚本
 
-| 命令              | 说明                                  |
-| ----------------- | ------------------------------------- |
-| `yarn start:antd` | 启动 Ant Design 表单设计器 Playground |
-| `yarn build`      | 构建所有 workspace 包                 |
-| `yarn test`       | 运行单元测试                          |
-| `yarn lint`       | ESLint 检查并自动修复                 |
+| 命令                                                              | 说明                                          |
+| ----------------------------------------------------------------- | --------------------------------------------- |
+| `yarn start:antd`                                                 | 启动 Ant Design 表单设计器 Playground（Vite） |
+| `yarn workspace @designable-v5/formily-antd run build:playground` | 构建 Playground 静态站点                      |
+| `yarn build`                                                      | 构建所有 workspace 包                         |
+| `yarn test`                                                       | 运行单元测试                                  |
+| `yarn lint`                                                       | ESLint 检查并自动修复                         |
 
 ## 与原版 Designable 的差异
 
@@ -105,6 +113,7 @@ yarn lint
 - 设计器内 Tabs / Collapse 使用 antd v5 **`items`** API
 - Modal 等组件 API 已同步 v5（如 `open` 替代 `visible`）
 - npm scope 为 **`@designable-v5/*`**
+- Playground 由 webpack 4 迁移至 **Vite 6**
 
 ## 许可证
 
