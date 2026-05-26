@@ -13,7 +13,7 @@ import {
   Select,
   FormItem,
   FormCollapse,
-} from '@formily/antd'
+} from '@formily/antd-v5'
 import { Modal, Card, Button, Tag, Tooltip } from 'antd'
 import { PathSelector } from './PathSelector'
 import { FieldPropertySetter } from './FieldPropertySetter'
@@ -176,10 +176,10 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
         )}
         width="70%"
         centered
-        bodyStyle={{ padding: 10 }}
+        styles={{ body: { padding: 10 } }}
         transitionName=""
         maskTransitionName=""
-        visible={modalVisible}
+        open={modalVisible}
         onCancel={closeModal}
         destroyOnClose
         onOk={() => {

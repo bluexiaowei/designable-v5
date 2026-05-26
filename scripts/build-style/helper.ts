@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { OutputOptions, rollup, RollupOptions } from 'rollup'
+import path from 'path'
 import postcss from 'rollup-plugin-postcss'
 import NpmImport from 'less-plugin-npm-import'
 import resolve from 'rollup-plugin-node-resolve'
@@ -15,6 +15,7 @@ export const getRollupBasePlugin = () => [
       less: {
         plugins: [new NpmImport({ prefix: '~' })],
         javascriptEnabled: true,
+        paths: [path.resolve(__dirname, '../..')],
       },
       sass: {},
       stylus: {},

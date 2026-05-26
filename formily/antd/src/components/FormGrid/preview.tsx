@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FormGrid as FormilyGird } from '@formily/antd'
+import { FormGrid as FormilyGird } from '@formily/antd-v5'
 import { TreeNode, createBehavior, createResource } from '@designable-v5/core'
 import {
   DnFC,

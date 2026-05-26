@@ -39,6 +39,11 @@
   "resolutions": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@formily/core": "^2.3.7",
+    "@formily/react": "^2.3.7",
+    "@formily/shared": "^2.3.7",
+    "@formily/reactive": "^2.3.7",
+    "@formily/reactive-react": "^2.3.7",
     "yargs": "^16.x"
   },
   "devDependencies": {
@@ -56,7 +61,7 @@
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.8.2",
     "@umijs/plugin-sass": "^1.1.1",
-    "antd": "^4.0.0",
+    "antd": "^5.13.0",
     "chalk": "^2.4.2",
     "chokidar": "^2.1.2",
     "concurrently": "^4.1.0",
@@ -129,8 +134,8 @@
     "ts-import-plugin": "1.6.1",
     "ts-jest": "^26.0.0",
     "ts-loader": "^7.0.4",
-    "ts-node": "^9.1.1",
-    "typescript": "4.1.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
@@ -162,6 +167,7 @@
     ]
   },
   "dependencies": {
-    "@ant-design/icons": "^4.0.2"
+    "@ant-design/icons": "^5.0.0",
+    "@formily/antd-v5": "^1.2.4"
   }
 }

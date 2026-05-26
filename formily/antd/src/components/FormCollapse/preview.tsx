@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { observer } from '@formily/react'
-import { Collapse } from 'antd'
-import { CollapseProps, CollapsePanelProps } from 'antd/lib/collapse'
+import { Collapse, CollapseProps } from 'antd'
 import { TreeNode, createBehavior, createResource } from '@designable-v5/core'
 import {
   useTreeNode,
@@ -19,17 +18,17 @@ import { AllLocales } from '../../locales'
 import { matchComponent } from '../../shared'
 
 const parseCollapse = (parent: TreeNode) => {
-  const tabs: TreeNode[] = []
+  const panels: TreeNode[] = []
   parent.children.forEach((node) => {
     if (matchComponent(node, 'FormCollapse.CollapsePanel')) {
-      tabs.push(node)
+      panels.push(node)
     }
   })
-  return tabs
+  return panels
 }
 
 export const FormCollapse: DnFC<CollapseProps> & {
-  CollapsePanel?: React.FC<CollapsePanelProps>
+  CollapsePanel?: React.FC<{ children?: React.ReactNode }>
 } = observer((props) => {
   const [activeKey, setActiveKey] = useState<string | string[]>([])
   const node = useTreeNode()
@@ -52,63 +51,63 @@ export const FormCollapse: DnFC<CollapseProps> & {
   })
   const getCorrectActiveKey = (
     activeKey: string[] | string,
-    tabs: TreeNode[]
+    panels: TreeNode[]
   ) => {
-    if (!tabs.length || !activeKey?.length) {
+    if (!panels.length || !activeKey?.length) {
       if (props.accordion) {
-        return tabs[0]?.id
+        return panels[0]?.id
       }
-      return tabs.map((item) => item.id)
+      return panels.map((item) => item.id)
     }
     if (
-      tabs.some((node) =>
+      panels.some((node) =>
         Array.isArray(activeKey)
           ? activeKey.includes(node.id)
           : node.id === activeKey
       )
     )
       return activeKey
-    return tabs[tabs.length - 1].id
+    return panels[panels.length - 1].id
   }
   const panels = parseCollapse(node)
   const renderCollapse = () => {
     if (!node.children?.length) return <DroppableWidget />
     return (
-      <Collapse {...props} activeKey={getCorrectActiveKey(activeKey, panels)}>
-        {panels.map((panel) => {
-          const props = panel.props['x-component-props'] || {}
-          return (
-            <Collapse.Panel
-              {...props}
-              style={{ ...props.style }}
-              header={
-                <span
-                  data-content-editable="x-component-props.header"
-                  data-content-editable-node-id={panel.id}
-                >
-                  {props.header}
-                </span>
-              }
-              key={panel.id}
-            >
-              {React.createElement(
-                'div',
-                {
-                  [designer.props.nodeIdAttrName]: panel.id,
-                  style: {
-                    padding: '20px 0',
-                  },
+      <Collapse
+        {...props}
+        activeKey={getCorrectActiveKey(activeKey, panels)}
+        items={panels.map((panel) => {
+          const paneProps = panel.props['x-component-props'] || {}
+          const { header, style, ...restPaneProps } = paneProps
+          return {
+            ...restPaneProps,
+            key: panel.id,
+            label: (
+              <span
+                data-content-editable="x-component-props.header"
+                data-content-editable-node-id={panel.id}
+              >
+                {header}
+              </span>
+            ),
+            children: React.createElement(
+              'div',
+              {
+                [designer.props.nodeIdAttrName]: panel.id,
+                style: {
+                  padding: '20px 0',
+                  ...style,
                 },
-                panel.children.length ? (
-                  <TreeNodeWidget node={panel} />
-                ) : (
-                  <DroppableWidget />
-                )
-              )}
-            </Collapse.Panel>
-          )
+              },
+              panel.children.length ? (
+                <TreeNodeWidget node={panel} />
+              ) : (
+                <DroppableWidget node={panel} />
+              )
+            ),
+          }
         })}
-      </Collapse>
+      />
     )
   }
   return (

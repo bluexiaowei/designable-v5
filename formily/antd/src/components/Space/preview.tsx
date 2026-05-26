@@ -1,5 +1,5 @@
 import React from 'react'
-import { Space as FormilySpace } from '@formily/antd'
+import { Space as FormilySpace } from '@formily/antd-v5'
 import { createBehavior, createResource } from '@designable-v5/core'
 import { DnFC } from '@designable-v5/react'
 import { createVoidFieldSchema } from '../Field'
