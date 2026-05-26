@@ -2,25 +2,26 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import fs from 'fs-extra'
-import { GlobSync } from 'glob'
+import { globSync } from 'glob'
 
 const repoRoot = path.resolve(__dirname, '../..')
 
 const getWorkspaceAlias = () => {
-  const pkg = fs.readJSONSync(path.join(repoRoot, 'package.json')) || {}
   const results: Record<string, string> = {}
-  const workspaces = pkg.workspaces
-  if (Array.isArray(workspaces)) {
-    workspaces.forEach((pattern: string) => {
-      const { found } = new GlobSync(pattern, { cwd: repoRoot })
-      found.forEach((name: string) => {
-        const workspacePkg = fs.readJSONSync(
-          path.join(repoRoot, name, 'package.json')
-        )
-        results[workspacePkg.name] = path.join(repoRoot, name, 'src')
-      })
+  const patterns = ['packages/*', 'formily/*']
+
+  for (const pattern of patterns) {
+    const found = globSync(pattern, { cwd: repoRoot })
+    found.forEach((dir: string) => {
+      const pkgPath = path.join(repoRoot, dir, 'package.json')
+      if (!fs.existsSync(pkgPath)) return
+      const workspacePkg = fs.readJSONSync(pkgPath)
+      if (workspacePkg.name) {
+        results[workspacePkg.name] = path.join(repoRoot, dir, 'src')
+      }
     })
   }
+
   return results
 }
 

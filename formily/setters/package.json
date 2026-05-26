@@ -3,19 +3,27 @@
   "version": "1.0.0-beta.45",
   "license": "MIT",
   "main": "lib",
+  "types": "lib/index.d.ts",
   "module": "esm",
+  "sideEffects": ["**/*.less"],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./esm/index.js",
+      "require": "./lib/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bluexiaowei/designable-v5.git"
   },
-  "types": "lib/index.d.ts",
   "bugs": {
     "url": "https://github.com/bluexiaowei/designable-v5/issues"
   },
   "homepage": "https://github.com/bluexiaowei/designable-v5#readme",
-  "engines": {
-    "npm": ">=3.0.0"
-  },
   "scripts": {
     "build": "rimraf -rf lib esm && pnpm run build:lib && ts-node copy",
     "build:lib": "tsup && tsc --emitDeclarationOnly --project tsconfig.build.json"
@@ -26,7 +34,11 @@
     "@formily/core": "^2.3.7",
     "@formily/react": "^2.3.7",
     "@formily/shared": "^2.3.7",
-    "antd": "^5.13.0"
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "antd": "^5.13.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "peerDependencies": {
     "@formily/antd-v5": "^1.2.4",
@@ -37,7 +49,7 @@
     "@types/react-dom": "18.x",
     "antd": "^5.13.0",
     "react": "18.x",
-    "react-dom": ">=18.0.0",
+    "react-dom": "18.x",
     "react-is": "18.x"
   },
   "dependencies": {

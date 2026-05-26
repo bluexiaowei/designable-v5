@@ -16,9 +16,8 @@ const EXTERNAL_PATTERNS = [
 
 export function createLibBuildConfig() {
   const shared: Partial<Options> = {
-    entry: ['src/**/*.ts', 'src/**/*.tsx'],
+    entry: ['src/**/*.ts', 'src/**/*.tsx', '!src/**/__tests__/**'],
     bundle: false,
-    dts: false,
     sourcemap: false,
     clean: false,
     treeshake: false,
@@ -38,6 +37,7 @@ export function createLibBuildConfig() {
       ...shared,
       format: 'cjs',
       outDir: 'lib',
+      dts: false,
       outExtension() {
         return { js: '.js' }
       },
@@ -46,6 +46,7 @@ export function createLibBuildConfig() {
       ...shared,
       format: 'esm',
       outDir: 'esm',
+      dts: false,
       outExtension() {
         return { js: '.js' }
       },

@@ -1,8 +1,13 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import path from 'path'
 import { copy, readFile, writeFile, existsSync } from 'fs-extra'
-import glob from 'glob'
+import { globSync } from 'glob'
 
 export type CopyBaseOptions = Record<'esStr' | 'libStr', string>
+
+const toOutputPath = (filename: string, outDir: 'lib' | 'esm') => {
+  const relativePath = path.relative('src', filename)
+  return path.join(outDir, relativePath)
+}
 
 const importLibToEs = async ({
   libStr,
@@ -17,7 +22,7 @@ const importLibToEs = async ({
 
   return writeFile(
     filename,
-    fileContent.replace(new RegExp(libStr, 'g'), esStr)
+    fileContent.replace(new RegExp(libStr, 'g'), esStr),
   )
 }
 
@@ -25,35 +30,29 @@ export const runCopy = ({
   resolveForItem,
   ...lastOpts
 }: CopyBaseOptions & { resolveForItem?: (filename: string) => unknown }) => {
-  return new Promise((resolve, reject) => {
-    glob(`./src/**/*`, (err, files) => {
-      if (err) {
-        return reject(err)
-      }
+  const files = globSync('./src/**/*', { windowsPathsNoEscape: true })
 
-      const all = [] as Promise<unknown>[]
+  const all = [] as Promise<unknown>[]
 
-      for (let i = 0; i < files.length; i += 1) {
-        const filename = files[i]
+  for (const filename of files) {
+    resolveForItem?.(filename)
 
-        resolveForItem?.(filename)
+    if (/\.(less|scss)$/.test(filename)) {
+      all.push(copy(filename, toOutputPath(filename, 'esm')))
+      all.push(copy(filename, toOutputPath(filename, 'lib')))
 
-        if (/\.(less|scss)$/.test(filename)) {
-          all.push(copy(filename, filename.replace(/src\//, 'esm/')))
-          all.push(copy(filename, filename.replace(/src\//, 'lib/')))
+      continue
+    }
 
-          continue
-        }
+    if (/[/\\]style\.ts$/.test(filename)) {
+      importLibToEs({
+        ...lastOpts,
+        filename: toOutputPath(filename, 'esm').replace(/\.ts$/, '.js'),
+      })
 
-        if (/\/style.ts$/.test(filename)) {
-          importLibToEs({
-            ...lastOpts,
-            filename: filename.replace(/src\//, 'esm/').replace(/\.ts$/, '.js'),
-          })
+      continue
+    }
+  }
 
-          continue
-        }
-      }
-    })
-  })
+  return Promise.all(all)
 }

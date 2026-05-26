@@ -28,6 +28,10 @@
 | Changesets       | ^2.29.0 |
 | tsup             | ^8.4.0  |
 | pnpm             | ^10.6.0 |
+| Vitest           | ^3.0.0  |
+| ESLint           | ^9.0.0  |
+| Prettier         | ^3.5.0  |
+| Husky            | ^9.0.0  |
 
 ## 项目结构
 
@@ -159,6 +163,10 @@ pnpm release
 - 包管理由 Yarn 1 迁移至 **pnpm 10**
 - 库包构建由 tsc 双编译迁移至 **tsup**（仅 lib/esm，不再发布 UMD）
 - React 由 17 升级至 **18**
+- Git 钩子由 ghooks 迁移至 **Husky + commitlint**
+- 测试由 Jest 26 迁移至 **Vitest 3**
+- ESLint 迁移至 **v9 flat config**，Prettier 升级至 **v3**
+- 移除 `shamefully-hoist`，子包显式声明 devDependencies
 
 ## 许可证
 

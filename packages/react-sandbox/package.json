@@ -4,10 +4,18 @@
   "license": "MIT",
   "main": "lib",
   "types": "lib/index.d.ts",
-  "engines": {
-    "npm": ">=3.0.0"
-  },
   "module": "esm",
+  "sideEffects": ["**/*.less"],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./esm/index.js",
+      "require": "./lib/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bluexiaowei/designable-v5.git"
@@ -20,8 +28,15 @@
     "build": "rimraf -rf lib esm && pnpm run build:lib",
     "build:lib": "tsup && tsc --emitDeclarationOnly --project tsconfig.build.json"
   },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
   "peerDependencies": {
-    "react": "16.x || 17.x"
+    "react": "18.x",
+    "react-dom": "18.x"
   },
   "dependencies": {
     "@designable-v5/react": "workspace:*",

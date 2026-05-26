@@ -3,15 +3,23 @@
   "version": "1.0.0-beta.45",
   "license": "MIT",
   "main": "lib",
-  "engines": {
-    "npm": ">=3.0.0"
-  },
+  "types": "lib/index.d.ts",
   "module": "esm",
+  "sideEffects": ["**/*.less"],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./esm/index.js",
+      "require": "./lib/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bluexiaowei/designable-v5.git"
   },
-  "types": "lib/index.d.ts",
   "bugs": {
     "url": "https://github.com/bluexiaowei/designable-v5/issues"
   },
@@ -19,9 +27,6 @@
   "scripts": {
     "build": "rimraf -rf lib esm && pnpm run build:lib",
     "build:lib": "tsup && tsc --emitDeclarationOnly --project tsconfig.build.json"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "devDependencies": {
     "@formily/core": "^2.3.7",
@@ -34,5 +39,8 @@
   "dependencies": {
     "@designable-v5/core": "workspace:*",
     "@designable-v5/shared": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
