@@ -1,3 +1,4 @@
+import React from 'react'
 import { createSchemaField } from '@formily/react'
 import {
   FormItem,
@@ -38,7 +39,7 @@ import {
   CollapseItem,
 } from './components'
 
-export const SchemaField = createSchemaField({
+export const SchemaField: React.ComponentType<any> = createSchemaField({
   components: {
     FormItem,
     CollapseItem,

@@ -11,15 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/bluexiaowei/designable-v5.git"
   },
-  "types": "esm/index.d.ts",
+  "types": "lib/index.d.ts",
   "bugs": {
     "url": "https://github.com/bluexiaowei/designable-v5/issues"
   },
   "homepage": "https://github.com/bluexiaowei/designable-v5#readme",
   "scripts": {
-    "build": "rimraf -rf lib esm dist && yarn run build:cjs && yarn run build:esm",
-    "build:cjs": "tsc --project tsconfig.build.json",
-    "build:esm": "tsc --project tsconfig.build.json --module es2015 --outDir esm"
+    "build": "rimraf -rf lib esm && pnpm run build:lib",
+    "build:lib": "tsup && tsc --emitDeclarationOnly --project tsconfig.build.json"
   },
   "publishConfig": {
     "access": "public"
@@ -33,8 +32,8 @@
     "@formily/json-schema": "^2.3.7"
   },
   "dependencies": {
-    "@designable-v5/core": "1.0.0-beta.45",
-    "@designable-v5/shared": "1.0.0-beta.45"
+    "@designable-v5/core": "workspace:*",
+    "@designable-v5/shared": "workspace:*"
   },
   "gitHead": "bda070c137ba0003cc4451b2208e089d2e326b23"
 }

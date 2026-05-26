@@ -3,9 +3,11 @@ import { observer } from '@formily/reactive-react'
 import { DroppableWidget } from '@designable-v5/react'
 import './styles.less'
 
-export const Container: React.FC = observer((props) => {
-  return <DroppableWidget>{props.children}</DroppableWidget>
-})
+export const Container: React.FC<{ children?: React.ReactNode }> = observer(
+  (props) => {
+    return <DroppableWidget>{props.children}</DroppableWidget>
+  }
+)
 
 export const withContainer = (Target: React.JSXElementConstructor<any>) => {
   return (props: any) => {

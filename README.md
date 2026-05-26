@@ -18,14 +18,16 @@
 
 | 类别             | 版本    |
 | ---------------- | ------- |
-| React            | 17.x    |
+| React            | 18.x    |
 | Ant Design       | ^5.13.0 |
 | Formily          | ^2.3.7  |
 | @formily/antd-v5 | ^1.2.4  |
-| TypeScript       | ^4.9.5  |
+| TypeScript       | ^5.7.0  |
 | Vite             | ^6.0.0  |
 | Turborepo        | ^2.5.0  |
 | Changesets       | ^2.29.0 |
+| tsup             | ^8.4.0  |
+| pnpm             | ^10.6.0 |
 
 ## 项目结构
 
@@ -61,18 +63,18 @@ designable-v5/
 ### 环境要求
 
 - Node.js >= 18（推荐 20 LTS 或更高）
-- Yarn 1.x
+- pnpm >= 10（推荐通过 Corepack 启用：`corepack enable`）
 
 ### 安装依赖
 
 ```bash
-yarn install
+pnpm install
 ```
 
 ### 启动 Playground
 
 ```bash
-yarn start:antd
+pnpm start:antd
 ```
 
 启动后访问 [http://127.0.0.1:3000](http://127.0.0.1:3000) 即可体验表单设计器（基于 Vite，冷启动约 1 秒内）。
@@ -88,24 +90,24 @@ Push 到 `main` 分支后，GitHub Actions 会自动将 Playground 部署到 Git
 构建 Playground 静态产物：
 
 ```bash
-yarn build:playground
+pnpm build:playground
 ```
 
 ### 构建
 
 ```bash
-# 构建所有 packages（Turborepo 并行 + 缓存）
-yarn build
+# 构建所有 packages（Turborepo 并行 + 缓存，库包使用 tsup）
+pnpm build
 
 # 单独构建某个包
-yarn turbo run build --filter=@designable-v5/formily-antd
+pnpm turbo run build --filter=@designable-v5/formily-antd
 ```
 
 ### 测试与代码检查
 
 ```bash
-yarn test
-yarn lint
+pnpm test
+pnpm lint
 ```
 
 ### 版本发布（Changesets）
@@ -114,35 +116,35 @@ yarn lint
 
 ```bash
 # 1. 记录本次变更（会生成 .changeset/*.md）
-yarn changeset
+pnpm changeset
 
 # 2. 本地预览版本 bump（可选）
-yarn version-packages
+pnpm version-packages
 
 # 3. 构建并发布到 npm（CI 也会自动执行）
-yarn release
+pnpm release
 ```
 
 **CI 自动化流程：**
 
 1. PR 合并到 `main` 且包含 changeset 文件 → Actions 自动创建 **Version Packages** PR
-2. 合并 Version PR → 自动 `yarn build` + `changeset publish` 发布到 npm
+2. 合并 Version PR → 自动 `pnpm build` + `changeset publish` 发布到 npm
 
-发布 npm 需在仓库 Secrets 中配置 `NPM_TOKEN`。当前为 beta 线，可先用 `yarn pre:enter:beta` 进入预发布模式。
+发布 npm 需在仓库 Secrets 中配置 `NPM_TOKEN`。当前为 beta 线，可先用 `pnpm pre:enter:beta` 进入预发布模式。
 
 ## 常用脚本
 
 | 命令                                                        | 说明                                          |
 | ----------------------------------------------------------- | --------------------------------------------- |
-| `yarn start:antd`                                           | 启动 Ant Design 表单设计器 Playground（Vite） |
-| `yarn build:playground`                                     | 构建 Playground 静态站点                      |
-| `yarn build`                                                | 构建所有 workspace 包（Turborepo）            |
-| `yarn turbo run build --filter=@designable-v5/formily-antd` | 仅构建指定包                                  |
-| `yarn changeset`                                            | 创建发版变更记录                              |
-| `yarn version-packages`                                     | 根据 changeset 更新版本号与 CHANGELOG         |
-| `yarn release`                                              | 构建并发布到 npm                              |
-| `yarn test`                                                 | 运行单元测试                                  |
-| `yarn lint`                                                 | ESLint 检查并自动修复                         |
+| `pnpm start:antd`                                           | 启动 Ant Design 表单设计器 Playground（Vite） |
+| `pnpm build:playground`                                     | 构建 Playground 静态站点                      |
+| `pnpm build`                                                | 构建所有 workspace 包（Turborepo + tsup）     |
+| `pnpm turbo run build --filter=@designable-v5/formily-antd` | 仅构建指定包                                  |
+| `pnpm changeset`                                            | 创建发版变更记录                              |
+| `pnpm version-packages`                                     | 根据 changeset 更新版本号与 CHANGELOG         |
+| `pnpm release`                                              | 构建并发布到 npm                              |
+| `pnpm test`                                                 | 运行单元测试                                  |
+| `pnpm lint`                                                 | ESLint 检查并自动修复                         |
 
 ## 与原版 Designable 的差异
 
@@ -154,6 +156,9 @@ yarn release
 - Modal 等组件 API 已同步 v5（如 `open` 替代 `visible`）
 - npm scope 为 **`@designable-v5/*`**
 - Playground 由 webpack 4 迁移至 **Vite 6**
+- 包管理由 Yarn 1 迁移至 **pnpm 10**
+- 库包构建由 tsc 双编译迁移至 **tsup**（UMD 仍保留 Rollup）
+- React 由 17 升级至 **18**
 
 ## 许可证
 

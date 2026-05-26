@@ -8,9 +8,13 @@ import './styles.less'
 
 const ExpandedMap = new Map<string, boolean>()
 
-export const FoldItem: React.FC<IFormItemProps> & {
-  Base?: React.FC
-  Extra?: React.FC
+export interface IFoldItemProps extends IFormItemProps {
+  children?: React.ReactNode
+}
+
+export const FoldItem: React.FC<IFoldItemProps> & {
+  Base?: React.FC<{ children?: React.ReactNode }>
+  Extra?: React.FC<{ children?: React.ReactNode }>
 } = observer(({ className, style, children, ...props }) => {
   const prefix = usePrefix('fold-item')
   const field = useField()
@@ -68,13 +72,13 @@ export const FoldItem: React.FC<IFormItemProps> & {
   )
 })
 
-const Base: React.FC = () => {
+const Base: React.FC<{ children?: React.ReactNode }> = () => {
   return <Fragment />
 }
 
 Base.displayName = 'FoldItem.Base'
 
-const Extra: React.FC = () => {
+const Extra: React.FC<{ children?: React.ReactNode }> = () => {
   return <Fragment />
 }
 

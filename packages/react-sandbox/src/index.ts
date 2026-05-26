@@ -6,7 +6,7 @@ import {
   useLayout,
   usePrefix,
 } from '@designable-v5/react'
-import ReactDOM from 'react-dom'
+import { createRoot, type Root } from 'react-dom/client'
 
 export interface ISandboxProps {
   style?: React.CSSProperties
@@ -96,10 +96,13 @@ export const useSandbox = (props: React.PropsWithChildren<ISandboxProps>) => {
   return ref
 }
 
+let sandboxRoot: Root | null = null
+
 if (globalThisPolyfill.frameElement) {
   //解决iframe内嵌如果iframe被移除，内部React无法回收内存的问题
   globalThisPolyfill.addEventListener('unload', () => {
-    ReactDOM.unmountComponentAtNode(document.getElementById('__SANDBOX_ROOT__'))
+    sandboxRoot?.unmount()
+    sandboxRoot = null
   })
 }
 
@@ -109,10 +112,12 @@ export const useSandboxScope = () => {
 
 export const renderSandboxContent = (render: (scope?: any) => JSX.Element) => {
   if (isFn(render)) {
-    ReactDOM.render(
-      render(useSandboxScope()),
-      document.getElementById('__SANDBOX_ROOT__')
-    )
+    const container = document.getElementById('__SANDBOX_ROOT__')
+    if (!container) return
+    if (!sandboxRoot) {
+      sandboxRoot = createRoot(container)
+    }
+    sandboxRoot.render(render(useSandboxScope()))
   }
 }
 

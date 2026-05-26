@@ -1,4 +1,3 @@
-import typescript from 'rollup-plugin-typescript2'
 import resolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 import commonjs from '@rollup/plugin-commonjs'
@@ -35,20 +34,12 @@ const presets = () => {
     '@designable-v5/react-settings-form': 'Designable.ReactSettingsForm',
   }
   return [
-    typescript({
-      tsconfig: './tsconfig.json',
-      tsconfigOverride: {
-        compilerOptions: {
-          module: 'ESNext',
-          declaration: false,
-        },
-      },
+    resolve({
+      extensions: ['.js', '.jsx'],
     }),
-    resolve(),
     postcss({
       extract: true,
       minimize: true,
-      // extensions: ['.css', '.less', '.sass'],
       use: {
         less: {
           plugins: [new NpmImport({ prefix: '~' })],
@@ -66,7 +57,7 @@ const presets = () => {
   ]
 }
 
-const inputFilePath = path.join(process.cwd(), 'src/index.ts')
+const inputFilePath = path.join(process.cwd(), 'lib/index.js')
 
 export const removeImportStyleFromInputFilePlugin = () => ({
   name: 'remove-import-style-from-input-file',
@@ -82,7 +73,7 @@ export const removeImportStyleFromInputFilePlugin = () => ({
 
 export default (filename, targetName, ...plugins) => [
   {
-    input: 'src/index.ts',
+    input: 'lib/index.js',
     output: {
       format: 'umd',
       file: `dist/${filename}.umd.production.min.js`,
@@ -91,7 +82,7 @@ export default (filename, targetName, ...plugins) => [
     plugins: [...presets(filename, targetName), ...plugins],
   },
   {
-    input: 'src/index.ts',
+    input: 'lib/index.js',
     output: {
       format: 'umd',
       file: `dist/${filename}.umd.production.js`,

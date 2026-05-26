@@ -11,6 +11,7 @@ const IconContext = createContext<IconProviderProps>(null)
 const isNumSize = (val: any) => /^[\d.]+$/.test(val)
 export interface IconProviderProps {
   tooltip?: boolean
+  children?: React.ReactNode
 }
 
 export interface IShadowSVGProps {
@@ -35,7 +36,7 @@ export const IconWidget: React.FC<IIconWidgetProps> & {
   const size = props.size || '1em'
   const height = props.style?.height || size
   const width = props.style?.width || size
-  const takeIcon = (infer: React.ReactNode) => {
+  const takeIcon = (infer: React.ReactNode | { shadow: string }) => {
     if (isStr(infer)) {
       const finded = registry.getDesignerIcon(infer)
       if (finded) {

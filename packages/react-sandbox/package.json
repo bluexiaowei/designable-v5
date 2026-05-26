@@ -17,17 +17,16 @@
   },
   "homepage": "https://github.com/bluexiaowei/designable-v5#readme",
   "scripts": {
-    "build": "rimraf -rf lib esm dist && yarn run build:cjs && yarn run build:esm && yarn run build:umd",
-    "build:cjs": "tsc --project tsconfig.build.json",
-    "build:esm": "tsc --project tsconfig.build.json --module es2015 --outDir esm",
+    "build": "rimraf -rf lib esm dist && pnpm run build:lib && pnpm run build:umd",
+    "build:lib": "tsup && tsc --emitDeclarationOnly --project tsconfig.build.json",
     "build:umd": "rollup --config"
   },
   "peerDependencies": {
     "react": "16.x || 17.x"
   },
   "dependencies": {
-    "@designable-v5/react": "1.0.0-beta.45",
-    "@designable-v5/shared": "1.0.0-beta.45"
+    "@designable-v5/react": "workspace:*",
+    "@designable-v5/shared": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

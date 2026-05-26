@@ -13,6 +13,7 @@ export interface IDroppableWidgetProps {
   node?: TreeNode
   actions?: INodeActionsWidgetActionProps[]
   placeholder?: boolean
+  children?: React.ReactNode
   height?: number
   style?: React.CSSProperties
   className?: string

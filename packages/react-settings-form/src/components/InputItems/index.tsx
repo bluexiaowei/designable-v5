@@ -13,6 +13,7 @@ export interface IInputItemsProps {
   style?: React.CSSProperties
   width?: string | number
   vertical?: boolean
+  children?: React.ReactNode
 }
 
 export interface IInputItemProps {
@@ -22,6 +23,7 @@ export interface IInputItemProps {
   width?: string | number
   vertical?: boolean
   title?: React.ReactNode
+  children?: React.ReactNode
 }
 
 const InputItemsContext = React.createContext<IInputItemsContext>(null)
