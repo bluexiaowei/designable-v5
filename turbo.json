@@ -1,0 +1,28 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["lib/**", "esm/**", "dist/**"]
+    },
+    "build:cjs": {
+      "outputs": ["lib/**"]
+    },
+    "build:esm": {
+      "outputs": ["esm/**"]
+    },
+    "build:umd": {
+      "outputs": ["dist/**"]
+    },
+    "build:playground": {
+      "dependsOn": ["^build"],
+      "outputs": ["build/**"]
+    },
+    "lint": {
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "dependsOn": ["^build"]
+    }
+  }
+}

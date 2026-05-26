@@ -32,7 +32,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build playground
-        run: yarn workspace @designable-v5/formily-antd run build:playground
+        run: yarn build:playground
         env:
           VITE_BASE: /designable-v5/
 

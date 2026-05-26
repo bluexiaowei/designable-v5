@@ -24,6 +24,7 @@
 | @formily/antd-v5 | ^1.2.4  |
 | TypeScript       | ^4.9.5  |
 | Vite             | ^6.0.0  |
+| Turborepo        | ^2.5.0  |
 
 ## 项目结构
 
@@ -86,17 +87,17 @@ Push 到 `main` 分支后，GitHub Actions 会自动将 Playground 部署到 Git
 构建 Playground 静态产物：
 
 ```bash
-yarn workspace @designable-v5/formily-antd run build:playground
+yarn build:playground
 ```
 
 ### 构建
 
 ```bash
-# 构建所有 packages
+# 构建所有 packages（Turborepo 并行 + 缓存）
 yarn build
 
 # 单独构建某个包
-yarn workspace @designable-v5/formily-antd run build
+yarn turbo run build --filter=@designable-v5/formily-antd
 ```
 
 ### 测试与代码检查
@@ -108,13 +109,14 @@ yarn lint
 
 ## 常用脚本
 
-| 命令                                                              | 说明                                          |
-| ----------------------------------------------------------------- | --------------------------------------------- |
-| `yarn start:antd`                                                 | 启动 Ant Design 表单设计器 Playground（Vite） |
-| `yarn workspace @designable-v5/formily-antd run build:playground` | 构建 Playground 静态站点                      |
-| `yarn build`                                                      | 构建所有 workspace 包                         |
-| `yarn test`                                                       | 运行单元测试                                  |
-| `yarn lint`                                                       | ESLint 检查并自动修复                         |
+| 命令                                                        | 说明                                          |
+| ----------------------------------------------------------- | --------------------------------------------- |
+| `yarn start:antd`                                           | 启动 Ant Design 表单设计器 Playground（Vite） |
+| `yarn build:playground`                                     | 构建 Playground 静态站点                      |
+| `yarn build`                                                | 构建所有 workspace 包（Turborepo）            |
+| `yarn turbo run build --filter=@designable-v5/formily-antd` | 仅构建指定包                                  |
+| `yarn test`                                                 | 运行单元测试                                  |
+| `yarn lint`                                                 | ESLint 检查并自动修复                         |
 
 ## 与原版 Designable 的差异
 

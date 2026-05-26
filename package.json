@@ -1,6 +1,7 @@
 {
   "name": "root",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -11,7 +12,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean",
-    "build": "rimraf -rf packages/*/{lib,esm} && lerna run build",
+    "build": "turbo run build",
+    "build:playground": "turbo run build:playground --filter=@designable-v5/formily-antd",
     "build:docs": "dumi build",
     "start": "dumi dev",
     "start:playground": "npm run start:basic",
@@ -19,7 +21,7 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "test:prod": "jest --coverage --silent",
-    "preversion": "npm run build && npm run lint",
+    "preversion": "yarn build && yarn lint",
     "version": "ts-node scripts/release changelog && git add -A",
     "version:alpha": "lerna version prerelease --preid alpha",
     "version:beta": "lerna version prerelease --preid beta",
@@ -99,6 +101,7 @@
     "jest-styled-components": "6.3.3",
     "jest-watch-lerna-packages": "^1.1.0",
     "lerna": "^4.0.0",
+    "turbo": "^2.5.0",
     "gh-release": "^5.0.1",
     "less": "^4.1.1",
     "less-loader": "^5.0.0",
