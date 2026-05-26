@@ -1,5 +1,5 @@
 {
-  "name": "@designable/formily-antd",
+  "name": "@designable-v5/formily-antd",
   "version": "1.0.0-beta.45",
   "license": "MIT",
   "main": "lib",
@@ -24,7 +24,7 @@
     "start": "webpack-dev-server --config playground/webpack.dev.ts"
   },
   "devDependencies": {
-    "@designable/react-settings-form": "1.0.0-beta.45",
+    "@designable-v5/react-settings-form": "1.0.0-beta.45",
     "@formily/antd": "^2.0.2",
     "@formily/core": "^2.0.2",
     "@formily/react": "^2.0.2",
@@ -60,10 +60,10 @@
     "react-is": "17.x"
   },
   "dependencies": {
-    "@designable/core": "1.0.0-beta.45",
-    "@designable/formily-setters": "1.0.0-beta.45",
-    "@designable/formily-transformer": "1.0.0-beta.45",
-    "@designable/react": "1.0.0-beta.45"
+    "@designable-v5/core": "1.0.0-beta.45",
+    "@designable-v5/formily-setters": "1.0.0-beta.45",
+    "@designable-v5/formily-transformer": "1.0.0-beta.45",
+    "@designable-v5/react": "1.0.0-beta.45"
   },
   "publishConfig": {
     "access": "public"

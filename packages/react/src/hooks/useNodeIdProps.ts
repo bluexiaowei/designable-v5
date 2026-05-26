@@ -1,4 +1,4 @@
-import { TreeNode } from '@designable/core'
+import { TreeNode } from '@designable-v5/core'
 import { useDesigner } from './useDesigner'
 import { useTreeNode } from './useTreeNode'
 

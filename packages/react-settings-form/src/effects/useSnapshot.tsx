@@ -1,4 +1,4 @@
-import { Operation } from '@designable/core'
+import { Operation } from '@designable-v5/core'
 import { onFieldInputValueChange } from '@formily/core'
 
 let timeRequest = null

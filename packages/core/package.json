@@ -1,5 +1,5 @@
 {
-  "name": "@designable/core",
+  "name": "@designable-v5/core",
   "version": "1.0.0-beta.45",
   "license": "MIT",
   "main": "lib",
@@ -33,7 +33,7 @@
     "@formily/reactive": "^2.0.2"
   },
   "dependencies": {
-    "@designable/shared": "1.0.0-beta.45",
+    "@designable-v5/shared": "1.0.0-beta.45",
     "@juggle/resize-observer": "^3.3.1"
   },
   "publishConfig": {

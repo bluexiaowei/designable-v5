@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "./lib",
     "paths": {
-      "@designable/*": ["../../packages/*", "../../formily/*"]
+      "@designable-v5/*": ["../../packages/*", "../../formily/*"]
     },
     "declaration": true
   }

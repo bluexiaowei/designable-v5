@@ -1,4 +1,4 @@
-import { IEventProps, Event } from '@designable/shared'
+import { IEventProps, Event } from '@designable-v5/shared'
 import { ISchema } from '@formily/json-schema'
 import {
   Engine,
