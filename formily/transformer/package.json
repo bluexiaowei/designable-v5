@@ -34,6 +34,5 @@
   "dependencies": {
     "@designable-v5/core": "workspace:*",
     "@designable-v5/shared": "workspace:*"
-  },
-  "gitHead": "bda070c137ba0003cc4451b2208e089d2e326b23"
+  }
 }

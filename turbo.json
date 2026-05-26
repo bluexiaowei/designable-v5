@@ -3,16 +3,13 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["lib/**", "esm/**", "dist/**"]
+      "outputs": ["lib/**", "esm/**"]
     },
     "build:cjs": {
       "outputs": ["lib/**"]
     },
     "build:esm": {
       "outputs": ["esm/**"]
-    },
-    "build:umd": {
-      "outputs": ["dist/**"]
     },
     "build:playground": {
       "dependsOn": ["^build"],

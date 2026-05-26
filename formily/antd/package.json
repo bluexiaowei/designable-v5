@@ -24,6 +24,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@ant-design/icons": "^5.0.0",
     "@designable-v5/react-settings-form": "workspace:*",
     "@formily/antd-v5": "^1.2.4",
     "@formily/core": "^2.3.7",
@@ -59,6 +60,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "gitHead": "2c44ae410a73f02735c63c6430e021a50e21f3ec"
+  }
 }

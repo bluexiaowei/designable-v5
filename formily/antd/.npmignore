@@ -1,11 +1,11 @@
 node_modules
 *.log
 build
-docs
-doc-site
+playground
 __tests__
 .eslintrc
-jest.config.js
 tsconfig.json
-.umi
+vite.config.ts
+tsup.config.ts
+copy.ts
 src

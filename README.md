@@ -136,7 +136,7 @@ pnpm release
 
 | 命令                                                        | 说明                                          |
 | ----------------------------------------------------------- | --------------------------------------------- |
-| `pnpm start:antd`                                           | 启动 Ant Design 表单设计器 Playground（Vite） |
+| `pnpm start:antd` / `pnpm start:playground`                 | 启动 Ant Design 表单设计器 Playground（Vite） |
 | `pnpm build:playground`                                     | 构建 Playground 静态站点                      |
 | `pnpm build`                                                | 构建所有 workspace 包（Turborepo + tsup）     |
 | `pnpm turbo run build --filter=@designable-v5/formily-antd` | 仅构建指定包                                  |
@@ -157,7 +157,7 @@ pnpm release
 - npm scope 为 **`@designable-v5/*`**
 - Playground 由 webpack 4 迁移至 **Vite 6**
 - 包管理由 Yarn 1 迁移至 **pnpm 10**
-- 库包构建由 tsc 双编译迁移至 **tsup**（UMD 仍保留 Rollup）
+- 库包构建由 tsc 双编译迁移至 **tsup**（仅 lib/esm，不再发布 UMD）
 - React 由 17 升级至 **18**
 
 ## 许可证

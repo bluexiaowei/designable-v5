@@ -17,13 +17,13 @@
   },
   "homepage": "https://github.com/bluexiaowei/designable-v5#readme",
   "scripts": {
-    "build": "rimraf -rf lib esm dist && pnpm run build:lib && ts-node copy && pnpm run build:umd",
-    "build:lib": "tsup && tsc --emitDeclarationOnly --project tsconfig.build.json",
-    "build:umd": "rollup --config"
+    "build": "rimraf -rf lib esm && pnpm run build:lib && ts-node copy",
+    "build:lib": "tsup && tsc --emitDeclarationOnly --project tsconfig.build.json"
   },
   "devDependencies": {
     "@formily/reactive": "^2.3.7",
-    "@formily/reactive-react": "^2.3.7"
+    "@formily/reactive-react": "^2.3.7",
+    "@types/dateformat": "^3.0.1"
   },
   "peerDependencies": {
     "@formily/reactive": "^2.3.7",
@@ -39,6 +39,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "gitHead": "bda070c137ba0003cc4451b2208e089d2e326b23"
+  }
 }
